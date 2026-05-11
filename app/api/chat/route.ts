@@ -7,12 +7,12 @@ export async function POST(req: NextRequest) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.CHAT_API_KEY}`,
     },
     body: JSON.stringify({
-      model: process.env.CHAT_MODEL,
       messages,
       stream: true,
+      temperature: 0.5,
+      top_p: 0.9,
     }),
   });
 

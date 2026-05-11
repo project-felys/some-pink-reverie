@@ -198,7 +198,7 @@ export default function Chat() {
           ref={scrollRef}
           className="flex-8 overflow-y-auto flex flex-col h-full p-2 items-center space-y-2 transition-opacity duration-300 ease-in-out"
           style={{
-            opacity: isMovieMode ? 0 : 100,
+            opacity: isMovieMode ? 0 : 1,
             pointerEvents: isMovieMode ? "none" : "auto",
           }}
         >
@@ -218,17 +218,28 @@ export default function Chat() {
           )}
         </ul>
         <div
-          className="flex-3 flex flex-col h-full items-center bg-linear-to-t from-black/60 via-black/20 to-transparent"
+          className="flex-3 flex flex-col h-full items-center p-1 bg-linear-to-t from-black/70 to-transparent space-y-1"
           style={{ cursor: isClickable ? "pointer" : "auto" }}
           onClick={handleChatClick}
         >
-          <div className="text-2xl xl:text-3xl text-yellow-100 mt-2">
-            {name}
-          </div>
-          <div className="bg-yellow-50 h-px w-11/12 md:w-3/4 my-1" />
+          <svg viewBox="0 0 100 20" className="h-10 w-full">
+            <text
+              x="50%"
+              y="50%"
+              textAnchor="middle"
+              dominantBaseline="central"
+              paintOrder="stroke"
+              fill="currentColor"
+              strokeWidth={1}
+              className="font-bold text-yellow-100 stroke-neutral-900/70"
+            >
+              {name}
+            </text>
+          </svg>
+          <div className="bg-yellow-50 h-px w-11/12 md:w-3/4" />
           <textarea
             key={textareaKey}
-            className={`flex-1 text-lg xl:text-xl w-11/12 mb-1 md:w-3/4 resize-none text-center outline-none overflow-y-auto fade-in-on-mount`}
+            className="flex-1 text-lg xl:text-xl w-11/12 md:w-3/4 resize-none text-center outline-none overflow-y-auto fade-in-on-mount text-shadow-2xs placeholder:text-neutral-100/70"
             style={{ cursor: "inherit" }}
             placeholder={configText.placeholderText}
             value={userInput}
@@ -237,12 +248,12 @@ export default function Chat() {
             readOnly={readOnly}
           />
           {isFastForwarding ? (
-            <i className="text-sm mb-1 fade-in-half-on-mount">
+            <i className="text-sm fade-in-half-on-mount">
               {configText.autoPlayEnabledHint}
             </i>
           ) : (
             isClickable && (
-              <i className="text-sm mb-1 fade-in-half-on-mount">
+              <i className="text-sm fade-in-half-on-mount">
                 {configText.clickToProceedHint}
               </i>
             )
@@ -263,7 +274,7 @@ function BackgroundImage({
   return (
     <div
       className="fixed inset-0 -z-10 overflow-hidden transition-all duration-500 ease-in-out"
-      style={{ opacity: visible ? 100 : 0 }}
+      style={{ opacity: visible ? 1 : 0 }}
     >
       <div
         className={`absolute inset-0 transition-all duration-500 ease-in-out ${
@@ -275,12 +286,12 @@ function BackgroundImage({
           alt=""
           fill
           placeholder="blur"
-          className="object-cover"
+          className="object-cover object-[70%_50%]"
         />
       </div>
       <div
-        className="absolute inset-0 bg-black/60 transition-opacity duration-500 ease-in-out"
-        style={{ opacity: blurred ? 100 : 0 }}
+        className="absolute inset-0 bg-black transition-opacity duration-500 ease-in-out"
+        style={{ opacity: blurred ? 0.7 : 0.2 }}
       />
     </div>
   );

@@ -288,7 +288,7 @@ function BackgroundImage({ visible }: { visible: boolean }) {
   return (
     <div
       className="fixed inset-0 -z-10 overflow-hidden transition-all duration-300 ease-in-out"
-      style={{ opacity: visible ? 100 : 0 }}
+      style={{ opacity: visible ? 1 : 0 }}
     >
       <Image
         src={elysia}

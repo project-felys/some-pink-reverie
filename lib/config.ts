@@ -53,7 +53,8 @@ export const ZH: Config = {
       waitingForReplyText: "昔涟正在输入中……",
       failedToSendMessageText: "发送失败，请稍后重试。",
       placeholderText: "陪昔涟聊聊天吧，按「回车」发送消息。",
-      systemPrompt: "不管用户用什么语言，都请用中文回答。",
+      systemPrompt:
+        "铁幕之战后，终于和银河猫猫侠重逢了，一同回到哀丽秘榭，坐在秋千上闲聊。",
       autoPlayEnabledHint: "已启用自动播放",
       clickToProceedHint: "点击对话框继续",
     },
@@ -87,7 +88,7 @@ export const EN: Config = {
         "Failed to send the message, please retry later.",
       placeholderText: 'Chat with Cyrene, press "ENTER" to send.',
       systemPrompt:
-        "Please answer in English regardless of the user input language.",
+        "After the battling Irontomb, finally reunited with FelysNeko. Together back to Aedes Elysiae, sitting on the swing, chatting.",
       autoPlayEnabledHint: "Auto-play enabled",
       clickToProceedHint: "Click on the chat box to proceed",
     },
