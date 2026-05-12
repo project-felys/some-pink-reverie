@@ -86,7 +86,7 @@ export const EN: Config = {
       waitingForReplyText: "Cyrene is typing...",
       failedToSendMessageText:
         "Failed to send the message, please retry later.",
-      placeholderText: 'Chat with Cyrene, press "ENTER" to send.',
+      placeholderText: "Chat with Cyrene, press ENTER to send.",
       systemPrompt:
         "After the battling Irontomb, finally reunited with FelysNeko. Together back to Aedes Elysiae, sitting on the swing, chatting.",
       autoPlayEnabledHint: "Auto-play enabled",

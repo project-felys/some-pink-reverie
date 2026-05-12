@@ -50,7 +50,9 @@ export default function Compiler() {
       compileWorkerRef.current.terminate();
     }
 
-    const worker = new Worker(new URL("@/workers/compile.ts", import.meta.url));
+    const worker = new Worker(
+      new URL("@/lib/workers/compile.ts", import.meta.url),
+    );
     compileWorkerRef.current = worker;
     setIsCompiling(true);
 
@@ -103,7 +105,9 @@ export default function Compiler() {
       executeWorkerRef.current.terminate();
     }
 
-    const worker = new Worker(new URL("@/workers/execute.ts", import.meta.url));
+    const worker = new Worker(
+      new URL("@/lib/workers/execute.ts", import.meta.url),
+    );
     executeWorkerRef.current = worker;
     setIsExecuting(true);
 
@@ -330,7 +334,7 @@ const monacoConfig = (_: editor.IStandaloneCodeEditor, monaco: Monaco) => {
     base: "vs-dark",
     inherit: true,
     rules: [
-      { token: "pink", foreground: "#ffc6f5" },
+      { token: "pink", foreground: "#ffc6f4" },
       { token: "identifier", foreground: "#9cdcfe" },
       { token: "function.call", foreground: "#dcdcaa" },
     ],
