@@ -19,10 +19,13 @@ type ConfigEntry<T> = {
 };
 
 type ChatConfig = ConfigEntry<{
+  systemName: string;
   userName: string;
   cyreneName: string;
+  healthCheckingText: string;
   sendingMessageText: string;
   failedToSendMessageText: string;
+  healthCheckFailedText: string;
   waitingForReplyText: string;
   placeholderText: string;
   systemPrompt: string;
@@ -48,11 +51,14 @@ export const ZH: Config = {
     namespace: "聊天",
     route: "chat",
     text: {
+      systemName: "δ-me13",
       userName: "银河猫猫侠",
       cyreneName: "昔涟",
+      healthCheckingText: "连接翁法罗斯万帷网中……",
       sendingMessageText: "消息发送中……",
       waitingForReplyText: "昔涟正在输入中……",
       failedToSendMessageText: "发送失败，请稍后重试。",
+      healthCheckFailedText: "银河猫猫侠正在占用显卡中，服务暂停。",
       placeholderText: "陪昔涟聊聊天吧，按「回车」发送消息。",
       systemPrompt:
         "铁幕之战后，终于和银河猫猫侠重逢了，一同回到哀丽秘榭，坐在秋千上闲聊。",
@@ -83,12 +89,16 @@ export const EN: Config = {
     namespace: "Chat",
     route: "chat",
     text: {
+      systemName: "δ-me13",
       userName: "FelysNeko",
       cyreneName: "Cyrene",
+      healthCheckingText: "Connecting to Amphoreus World Wound Web...",
       sendingMessageText: "Sending message...",
       waitingForReplyText: "Cyrene is typing...",
       failedToSendMessageText:
         "Failed to send the message, please retry later.",
+      healthCheckFailedText:
+        "FelysNeko is occupying the GPU, service is paused.",
       placeholderText: "Chat with Cyrene, press ENTER to send.",
       systemPrompt:
         "After the battling Irontomb, finally reunited with FelysNeko. Together back to Aedes Elysiae, sitting on the swing, chatting.",

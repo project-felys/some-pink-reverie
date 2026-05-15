@@ -17,25 +17,51 @@ type ChatMessage = {
   content: string;
 };
 
+function useBackendHealth(onSuccess: () => void, onFail: () => void) {
+  const isHealthCheckingRef = useRef(true);
+
+  const checkBackend = async () => {
+    const res = await fetch("/api/health", {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (res.ok) {
+      isHealthCheckingRef.current = false;
+      onSuccess();
+    } else {
+      onFail();
+    }
+  };
+
+  useEffect(() => {
+    checkBackend();
+  }, []);
+
+  return isHealthCheckingRef;
+}
+
 export default function Chat() {
   const configText = useConfig().chat.text;
   const [isMovieMode, setIsMovieMode] = useState(false);
   const [isFastForwarding, setIsFastForwarding] = useState(true);
 
-  const [userInput, setUserInput] = useState("");
-  const [readOnly, setReadOnly] = useState(false);
-  const [name, setName] = useState(configText.userName);
+  const [name, setName] = useState(configText.systemName);
+  const [userInput, setUserInput] = useState(configText.healthCheckingText);
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: "system", content: configText.systemPrompt },
   ]);
+
+  const [readOnly, setReadOnly] = useState(true);
   const [isClickable, setIsClickable] = useState(false);
   const [textareaKey, setTextareaKey] = useState(0);
 
   const lineIteratorRef = useRef<AsyncIterableIterator<string> | null>(null);
+  const scrollRef = useRef<HTMLUListElement>(null);
   const isFastForwardingRef = useRef(false);
   const allowNextLineClick = useRef(false);
-
-  const scrollRef = useRef<HTMLUListElement>(null);
+  const isHealthCheckingRef = useBackendHealth(
+    () => backToUserInput(),
+    () => setAnimatedUserInput(configText.healthCheckFailedText),
+  );
 
   const timeout = 400;
 
@@ -50,7 +76,7 @@ export default function Chat() {
     } else if (role === "assistant") {
       return configText.cyreneName;
     } else {
-      return "δ-me13";
+      return configText.systemName;
     }
   };
 
@@ -114,7 +140,9 @@ export default function Chat() {
 
   useEffect(() => {
     isFastForwardingRef.current = isFastForwarding;
-    startFastForwardingLoop(timeout);
+    if (!isHealthCheckingRef.current) {
+      startFastForwardingLoop(timeout);
+    }
   }, [isFastForwarding]);
 
   const handleEnterKeyDown = async (
@@ -138,7 +166,7 @@ export default function Chat() {
     setMessages(nextMessages);
 
     try {
-      setName("δ-me13");
+      setName(configText.systemName);
       setAnimatedUserInput(configText.sendingMessageText);
 
       const response = await fetch("/api/chat", {
